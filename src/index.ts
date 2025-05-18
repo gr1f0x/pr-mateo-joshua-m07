@@ -11,7 +11,8 @@ import cartRoutes from "./routes/cartRoutes";
 
 // Configuración
 const app = express();
-const PORT = parseInt(process.env.PORT || "5000", 10);
+// Render usa PORT=10000 por defecto, pero respetamos cualquier valor configurado
+const PORT = parseInt(process.env.PORT || "10000", 10);
 
 // Middleware
 app.use(cors());
@@ -32,9 +33,9 @@ app.get("/", (_req, res) => {
 console.log("Intentando conectar a MongoDB...");
 connectDB()
   .then(() => {
-    // Iniciar servidor de manera explícita con el puerto
+    // Iniciar servidor escuchando en todas las interfaces (0.0.0.0) como requiere Render
     const server = app.listen(PORT, "0.0.0.0", () => {
-      console.log(`✅ Servidor escuchando explícitamente en el puerto ${PORT}`);
+      console.log(`✅ Servidor escuchando en http://0.0.0.0:${PORT} (Render compatible)`);
     });
 
     // Manejar errores de inicio del servidor

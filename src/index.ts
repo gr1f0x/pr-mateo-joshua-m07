@@ -4,10 +4,10 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
-import { connectDB } from "./config/database";
-import userRoutes from "./routes/userRoutes";
-import productRoutes from "./routes/productRoutes";
-import cartRoutes from "./routes/cartRoutes";
+import { connectDB } from "./config/database.js";
+import userRoutes from "./routes/userRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
 
 // Configuración
 const app = express();
@@ -35,7 +35,9 @@ connectDB()
   .then(() => {
     // Iniciar servidor escuchando en todas las interfaces (0.0.0.0) como requiere Render
     const server = app.listen(PORT, "0.0.0.0", () => {
-      console.log(`✅ Servidor escuchando en http://0.0.0.0:${PORT} (Render compatible)`);
+      console.log(
+        `✅ Servidor escuchando en http://0.0.0.0:${PORT} (Render compatible)`
+      );
     });
 
     // Manejar errores de inicio del servidor
